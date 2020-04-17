@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>QML/Images/Manual.png</file>
+        <file>QML/Images/CompanyLogo.png</file>
+        <file>QML/Images/laser.png</file>
+        <file>QML/Images/Strcture.png</file>
+    </qresource>
+</RCC>

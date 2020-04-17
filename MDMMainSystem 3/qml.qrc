@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>QML/Auto.qml</file>
+        <file>QML/IO.qml</file>
+        <file>QML/Log.qml</file>
+        <file>QML/Machine.qml</file>
+        <file>QML/MainWindow.qml</file>
+        <file>QML/Manual.qml</file>
+        <file>QML/Setting.qml</file>
+        <file>QML/CustomQML/Button.qml</file>
+        <file>QML/CustomQML/HeaderText.qml</file>
+        <file>QML/CustomQML/HorizontalRule.qml</file>
+        <file>QML/CustomQML/PageHeader.qml</file>
+        <file>QML/CustomQML/TableView.qml</file>
+        <file>QML/CustomQML/Text.qml</file>
+        <file>QML/CustomQML/PageLower.qml</file>
+        <file>QML/CustomQML/TextBody.qml</file>
+        <file>QML/CustomQML/TextHeading.qml</file>
+        <file>QML/Laser.qml</file>
+        <file>QML/startApp.qml</file>
+        <file>QML/SplashScreen.qml</file>
+        <file>main_zh_hk.qm</file>
+        <file>QML/Setting/AutoSetting.qml</file>
+        <file>QML/CustomQML/Pane.qml</file>
+        <file>QML/Setting/Motor.qml</file>
+        <file>QML/Setting/Reset.qml</file>
+        <file>QML/CustomQML/TextField.qml</file>
+    </qresource>
+</RCC>

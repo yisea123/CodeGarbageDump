@@ -1,0 +1,95 @@
+// See README.txt for information and build instructions.
+//
+// Note: START and END tags are used in comments to define sections used in
+// tutorials.  They are not part of the syntax for Protocol Buffers.
+//
+// To get an in-depth walkthrough of this file and the related examples, see:
+// https://developers.google.com/protocol-buffers/docs/tutorials
+
+// [START declaration]
+syntax = "proto3";
+package wms_commu;
+
+/*********************消息结构体***************************/
+//运输任务
+message CarryTaskInfo{
+	string	storage_no	= 1;	//储位号
+	bytes	custom_data	= 2;	//用户自定义数据
+}
+
+//举升任务
+message LiftTaskInfo{
+	string	storage_no	= 1;	//呼叫站编号
+    int32	lift_direction	= 2;	//举升方向, 1:顶起, 2: 放下
+	bytes	custom_data	= 3;	//用户自定义数据
+}
+
+//滚筒任务
+message RollerTaskInfo{
+	string	storage_no		= 1;	//呼叫站编号
+    int32	roller_direction	= 2;	//0:前滚,1: 后滚？待确认
+	bytes	custom_data		= 3;	//用户自定义数据
+}
+
+//牵引任务
+message TractionTaskInfo{
+    string storage_no = 1;  // 储位号
+    int32 direction   = 2;  // 0: 上料, 1: 下料
+    bytes custom_data = 3;	// 用户自定义数据
+}
+
+//子任务数据 (如:一个总的任务要拣选10样商品, 每拣选一个商品就是一个子任务)
+message SubTaskData{
+    int32	type	= 1;	//任务举型, 1: 拣选任务, 2: 举升任务, 3: 滚筒任务, 4: 牵引任务
+    bytes	data	= 2;	//任务数据, 根据type取值, 反序列化成不同的任务结构
+}
+
+//单个wms任务信息, 默认数据结构
+message WmsTaskInfo{
+    string		task_id                     = 1;	// 任务id
+    bool		execute_by_order            = 2;	// 是否按顺序执行子任务
+    bool		can_skip                    = 3;	// 当一个子任务无法完成时, 是否可以跳过
+    repeated	SubTaskData	sub_task_data 	= 4;	// 子任务数组
+    bytes		custom_data                 = 5;	// 用户自定义数据
+    bool		goto_pack_station           = 6;	// 任务执行完成后是否去打包台
+}
+
+//wms任务数据
+message WmsTaskData{
+    int32	source              = 1;	// wms数据源类型, 不同的源, 发送的数据结构可能不一样。1: 默认, 其他值为不同企业定制
+    int32	task_type           = 2;	// 任务类型, 1: 运输, 2: 搬运（带顶升）, 3: 滚筒
+    repeated bytes	task_data 	= 3;	// wms任务数组, source为1时任务结构为WmsTaskInfo, 其他值为不同企业定制结构
+    int32       robot_id        = 4;    // 机器人ID, 0为不指派机器人由调度分配
+}
+
+
+/***********************请求**************************/
+//执行任务请求
+message DoTaskRequest{
+	WmsTaskData	wms_task	= 1;	//wms任务数据
+}
+
+//取消任务请求
+message CancelTaskRequest{
+	string	wms_task_id	= 1;	//wms任务id
+}
+
+/***********************返回**************************/
+//执行任务返回
+message DoTaskResponse{
+	string 	wms_task_id	= 1;	//wms任务id
+    string	robot_id	= 2;	//机器人id, 只有调度系统成功分配了机器人, 才返回该结构, 否则只返回头部。
+	string	robot_no	= 3;	//机器人编号 
+}
+
+
+/***********************通知**************************/
+//任务进度通知
+message TaskProgressNotify{
+	string	wms_task_id	= 1;	//wms任务id
+    string	storage_no	= 2;	//储位编号, 当status表示子任务状态时, 该参数有用
+    int32	status		= 3;	//1:子任务完成, 2: 子任务跳过, 3: 子任务警告, 4: 子任务失败, 5: 任务完成, 6: 任务失败, 7: 任务取消
+}
+
+
+

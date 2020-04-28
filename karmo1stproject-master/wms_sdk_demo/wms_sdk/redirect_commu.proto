@@ -1,0 +1,56 @@
+// See README.txt for information and build instructions.
+//
+// Note: START and END tags are used in comments to define sections used in
+// tutorials.  They are not part of the syntax for Protocol Buffers.
+//
+// To get an in-depth walkthrough of this file and the related examples, see:
+// https://developers.google.com/protocol-buffers/docs/tutorials
+
+// [START declaration]
+syntax = "proto3";
+package redirect_commu;
+
+//通信地址
+message Address{
+	string	ip		= 1;    //ip
+	uint32  port		= 2;    //端口号
+}
+
+//重定向信息
+message RedirectInfo{
+	string	ip		= 1;    //ip
+	uint32  req_port	= 2;    //请求端口
+	uint32  pub_port	= 3;    //订阅端口
+}
+
+message ScheduleInfo{
+	repeated Address schedule_addr	= 1;    //调度地址,数组中索引0:系统管理请求地址，索引1:任务执行订阅地址，索引2:系统监测订阅地址，索引3:系统管理交互地址，索引4:任务执行WMS请求地址，索引5:任务执行WMS订阅地址,索引6:系统管理订阅地址,索引7:交通管制订阅地址
+}
+
+//获取调度地址请求
+message ScheduleAddrRequest{
+	uint32	server_type	= 1;    //1代表主服务器，2代表任意服务器  
+}
+
+//调度服务器注册请求
+message ScheduleRegisterRequest{
+	repeated Address server_addr	= 1;    //服务器地址
+}
+
+//获取调度地址返回
+message ScheduleAddrResponse{
+	repeated Address schedule_addr	= 1;    //调度地址,数组中索引0:系统管理请求地址，索引1:任务执行订阅地址，索引2:系统监测订阅地址，索引3:系统管理交互地址，索引4:任务执行WMS请求地址，索引5:任务执行WMS订阅地址,索引6:系统管理订阅地址,索引7:交通管制订阅地址
+}
+
+//重定向服务器列表返回
+message RedirectAddrListResponse{
+	repeated RedirectInfo   redirect_info = 1;    //重定向信息
+}
+
+//发送调度信息推送
+message ScheduleUpdateNotify{
+	repeated ScheduleInfo  schedule_info = 1; //调度信息
+}
+
+
+

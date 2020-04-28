@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>QML/CustomQML/Button.qml</file>
+        <file>QML/CustomQML/HeaderText.qml</file>
+        <file>QML/CustomQML/HorizontalRule.qml</file>
+        <file>QML/CustomQML/PageHeader.qml</file>
+        <file>QML/CustomQML/PageLower.qml</file>
+        <file>QML/CustomQML/TableView.qml</file>
+        <file>QML/CustomQML/Text.qml</file>
+        <file>QML/CustomQML/TextBody.qml</file>
+        <file>QML/CustomQML/TextHeading.qml</file>
+        <file>QML/MainWindow.qml</file>
+        <file>QML/MainPage.qml</file>
+        <file>QML/Images/CompanyLogo.png</file>
+        <file>QML/CustomQML/ButtonToggle.qml</file>
+        <file>QML/SplashScreen.qml</file>
+        <file>QML/OrderSheet.qml</file>
+        <file>QML/LogSheet.qml</file>
+        <file>QML/startApp.qml</file>
+    </qresource>
+</RCC>
